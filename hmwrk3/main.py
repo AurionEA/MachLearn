@@ -24,7 +24,7 @@ X = data.drop('case_status', axis=1)
 y = data['case_status']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# 3. Визуализация и статистики (без изменений)
+# 3. Визуализация и статистики
 print("Основные статистики:")
 print(data.describe())
 print("\nКорреляционная матрица (числовые признаки):")
@@ -71,7 +71,6 @@ scaler = StandardScaler(with_mean=False)  # with_mean=False для sparse
 X_train_scaled = scaler.fit_transform(X_train_processed)
 X_test_scaled = scaler.transform(X_test_processed)
 
-# Остальной код без изменений...
 # 7. KNN классификатор
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train_scaled, y_train)
@@ -108,4 +107,5 @@ print("KNN после SMOTE — Точность:", accuracy_score(y_test, y_pre
 print(classification_report(y_test, y_pred_sm))
 
 # 10. Выводы
+
 # Random Forest показал лучшую точность (~0.89) благодаря обработке категориальных данных. SMOTE улучшил F1 для минорного класса. Коррелированные переменные не исключены, так как их мало и корреляция слабая.
