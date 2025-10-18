@@ -15,7 +15,6 @@ import seaborn as sns
 
 # 1. Загрузка данных
 data = pd.read_csv('us_perm_visas.csv')
-# Уменьшите размер, если память ограничена (например, 50k строк)
 # data = data.sample(50000, random_state=42)
 
 # 2. Разбиение на train/test
@@ -33,7 +32,7 @@ corr = X[numeric_cols].corr()
 sns.heatmap(corr, annot=True, vmin = -1, vmax = 1, cmap='coolwarm')
 plt.show()
 
-# 4. Обработка пропущенных значений (без изменений)
+# 4. Обработка пропущенных значений
 X_train = X_train.fillna(X_train.median(numeric_only=True))
 X_test = X_test.fillna(X_test.median(numeric_only=True))
 for col in X_train.select_dtypes(include=['object']).columns:
@@ -108,4 +107,5 @@ print(classification_report(y_test, y_pred_sm))
 
 # 10. Выводы
 
-# Random Forest показал лучшую точность (~0.89) благодаря обработке категориальных данных. SMOTE улучшил F1 для минорного класса. Коррелированные переменные не исключены, так как их мало и корреляция слабая.
+# Random Forest показал лучшую точность (~0.89) благодаря обработке категориальных данных. Коррелированные переменные не исключены, так как их мало и корреляция слабая.
+
